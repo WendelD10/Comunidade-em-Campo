@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade em Campo - Castelo Branco 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c7a3f 0%, #4caf50 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .btn-login {
+            background: white;
+            color: #2c7a3f;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 122, 63, 0.85), rgba(44, 122, 63, 0.85)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1600&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Meeting Alert */
+        .meeting-alert {
+            background: #ff9800;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            color: #2c7a3f;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Financial Summary */
+        .financial-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .finance-box {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 5px solid #2c7a3f;
+        }
+
+        .finance-box.income {
+            border-left-color: #4caf50;
+        }
+
+        .finance-box.expense {
+            border-left-color: #f44336;
+        }
+
+        .finance-box.balance {
+            border-left-color: #2196f3;
+        }
+
+        .finance-box h4 {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .finance-box .amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Projects */
+        .project-item {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2c7a3f;
+        }
+
+        .project-item h4 {
+            color: #2c7a3f;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-item[style*="display: flex"] {
+                flex-direction: column !important;
+            }
+            
+            .project-item img {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        .status-active {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-planned {
+            background: #ff9800;
+            color: white;
+        }
+
+        .status-completed {
+            background: #2196f3;
+            color: white;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 200px;
+            background: #e0e0e0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2c7a3f;
+        }
+
+        .btn {
+            background: #2c7a3f;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #1f5a2e;
+        }
+
+        /* Protected Content */
+        .protected-content {
+            display: none;
+        }
+
+        .protected-content.active {
+            display: block;
+        }
+
+        /* Section */
+        section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Footer */
+        footer {
+            background: #2c7a3f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table th, table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: #2c7a3f;
+            color: white;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .user-info {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .user-info.active {
+            display: block;
+        }
+
+        .user-permission-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+
+        .badge-admin {
+            background: #f44336;
+            color: white;
+        }
+
+        .badge-editor {
+            background: #ff9800;
+            color: white;
+        }
+
+        .badge-visualizador {
+            background: #2196f3;
+            color: white;
+        }
+
+        .btn-logout {
+            background: #f44336;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Edit Mode */
+        .edit-controls {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-edit {
+            background: #ff9800;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-save {
+            background: #4caf50;
+        }
+
+        .btn-cancel {
+            background: #f44336;
+        }
+
+        .editable {
+            position: relative;
+        }
+
+        .editable:hover::after {
+            content: '✏️';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .editable.editing {
+            background: #fff3cd;
+            padding: 0.3rem;
+            border-radius: 3px;
+        }
+
+        input.edit-input, textarea.edit-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid #ff9800;
+            border-radius: 3px;
+            font-size: inherit;
+            font-family: inherit;
+        }
+
+        /* History Modal */
+        .history-section {
+            background: #f5f5f5;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .history-item {
+            background: white;
+            padding: 1rem;
+            border-left: 4px solid #2196f3;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+
+        .history-item .timestamp {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-item .change-description {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .history-item .change-details {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .btn-add {
+            background: #2196f3;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 250px;
+                height: 100vh;
+                background: #2c7a3f;
+                padding: 5rem 2rem 2rem 2rem;
+                transition: left 0.3s;
+                z-index: 999;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .finance-box .amount {
+                font-size: 1.8rem;
+            }
+
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+
+            .logo p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                    <img src="logo-comunidade.png" alt="Logo Comunidade em Campo" style="height: 60px; width: auto;">
+                    <div>
+                        <h1>Comunidade em Campo</h1>
+                        <p>Castelo Branco 2 - Rio Grande/RS</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#" onclick="showSection('home'); closeMenu();">Início</a></li>
+                    <li><a href="#" onclick="showSection('projects'); closeMenu();">Projetos</a></li>
+                    <li><a href="#" onclick="showSection('gallery'); closeMenu();">Galeria</a></li>
+                    <li><a href="#" onclick="showSection('meetings'); closeMenu();">Reuniões</a></li>
+                    <li><a href="#" class="btn-login" onclick="showLogin(); closeMenu();">Área dos Membros</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Meeting Alert -->
+    <div class="meeting-alert" id="meetingAlert">
+        📅 PRÓXIMA REUNIÃO: Sábado, 15/02/2026 às 14h00 - Sede do Projeto
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="hero">
+            <h2>Transformando Vidas no Castelo Branco 2</h2>
+            <p>Juntos construindo uma comunidade mais forte e solidária</p>
+        </div>
+
+        <div class="container">
+            <h2 style="text-align: center; color: #2c7a3f; margin-bottom: 2rem;">Nossa Missão</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=300&fit=crop" alt="Comunidade" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <h3>👥 Comunidade</h3>
+                    <p>Fortalecer os laços comunitários e promover a integração social no bairro Castelo Branco 2.</p>
+                </div>
+                <div class="card">
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&h=300&fit=crop" alt="Ação Social" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <h3>🎯 Ação Social</h3>
+                    <p>Desenvolver projetos que impactem positivamente a vida dos moradores da região.</p>
+                </div>
+                <div class="card">
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop" alt="Solidariedade" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <h3>🤝 Solidariedade</h3>
+                    <p>Criar uma rede de apoio mútuo e colaboração entre os membros da comunidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 style="text-align: center; color: #2c7a3f; margin-bottom: 2rem;">Projetos Sociais</h2>
+            
+            <h3 style="color: #2c7a3f; margin-top: 3rem;">Em Andamento</h3>
+            <div class="project-item" style="display: flex; gap: 1rem; align-items: center;">
+                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=150&h=150&fit=crop" alt="Horta" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4>Horta Comunitária</h4>
+                    <p>Cultivo de alimentos orgânicos para distribuição às famílias do bairro.</p>
+                    <span class="project-status status-active">ATIVO</span>
+                </div>
+            </div>
+            <div class="project-item" style="display: flex; gap: 1rem; align-items: center;">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=150&h=150&fit=crop" alt="Reforço Escolar" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4>Reforço Escolar</h4>
+                    <p>Apoio educacional para crianças e adolescentes em período complementar.</p>
+                    <span class="project-status status-active">ATIVO</span>
+                </div>
+            </div>
+
+            <h3 style="color: #2c7a3f; margin-top: 3rem;">Projetos Futuros</h3>
+            <div class="project-item" style="display: flex; gap: 1rem; align-items: center;">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=150&h=150&fit=crop" alt="Capacitação" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4>Oficinas de Capacitação Profissional</h4>
+                    <p>Cursos gratuitos de qualificação para o mercado de trabalho.</p>
+                    <span class="project-status status-planned">PLANEJADO</span>
+                </div>
+            </div>
+            <div class="project-item" style="display: flex; gap: 1rem; align-items: center;">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=150&h=150&fit=crop" alt="Campo de Futebol" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4>Campo de Futebol Comunitário</h4>
+                    <p>Reforma e revitalização do campo para atividades esportivas.</p>
+                    <span class="project-status status-planned">PLANEJADO</span>
+                </div>
+            </div>
+
+            <h3 style="color: #2c7a3f; margin-top: 3rem;">Projetos Realizados</h3>
+            <div class="project-item" style="display: flex; gap: 1rem; align-items: center;">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=150&h=150&fit=crop" alt="Campanha de Inverno" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4>Campanha de Arrecadação de Inverno 2025</h4>
+                    <p>Distribuição de 500 peças de roupas e cobertores para famílias necessitadas.</p>
+                    <span class="project-status status-completed">CONCLUÍDO</span>
+                </div>
+            </div>
+            <div class="project-item" style="display: flex; gap: 1rem; align-items: center;">
+                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=150&h=150&fit=crop" alt="Festa das Crianças" style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4>Festa das Crianças 2025</h4>
+                    <p>Evento com atividades recreativas, lanches e distribuição de brinquedos.</p>
+                    <span class="project-status status-completed">CONCLUÍDO</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <h2 style="text-align: center; color: #2c7a3f; margin-bottom: 2rem;">Galeria de Momentos</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&h=400&fit=crop" alt="Horta Comunitária">
+                    <div class="gallery-overlay">
+                        <p>Horta Comunitária - Janeiro 2026</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop" alt="Aulas de Reforço">
+                    <div class="gallery-overlay">
+                        <p>Aulas de Reforço - Fevereiro 2026</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=400&fit=crop" alt="Festa das Crianças">
+                    <div class="gallery-overlay">
+                        <p>Festa das Crianças - Outubro 2025</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop" alt="Campanha de Inverno">
+                    <div class="gallery-overlay">
+                        <p>Campanha de Inverno - Junho 2025</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&h=400&fit=crop" alt="Torneio de Futebol">
+                    <div class="gallery-overlay">
+                        <p>Torneio de Futebol - Dezembro 2025</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop" alt="Reunião da Equipe">
+                    <div class="gallery-overlay">
+                        <p>Reunião da Equipe - Janeiro 2026</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop" alt="Distribuição de Alimentos">
+                    <div class="gallery-overlay">
+                        <p>Distribuição de Alimentos - Dezembro 2025</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600&h=400&fit=crop" alt="Oficina de Arte">
+                    <div class="gallery-overlay">
+                        <p>Oficina de Arte - Novembro 2025</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=400&fit=crop" alt="Atividades Esportivas">
+                    <div class="gallery-overlay">
+                        <p>Atividades Esportivas - Janeiro 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meetings Section -->
+    <section id="meetings">
+        <div class="container">
+            <h2 style="text-align: center; color: #2c7a3f; margin-bottom: 2rem;">📅 Calendário de Reuniões</h2>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.95), rgba(245, 124, 0, 0.95)), url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&h=400&fit=crop'); background-size: cover; background-position: center; color: white; text-align: center; padding: 3rem;">
+                <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">PRÓXIMA REUNIÃO</h3>
+                <p style="font-size: 1.5rem; margin: 1rem 0;">Sábado, 15 de Fevereiro de 2026</p>
+                <p style="font-size: 2rem; font-weight: bold; margin: 1rem 0;">14:00</p>
+                <p style="font-size: 1.2rem;">📍 Sede do Projeto - Rua Principal, 123</p>
+            </div>
+
+            <h3 style="color: #2c7a3f; margin-top: 3rem; margin-bottom: 1rem;">Reuniões Mensais Regulares</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Local</th>
+                        <th>Pauta Principal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>15/02/2026</td>
+                        <td>14:00</td>
+                        <td>Sede do Projeto</td>
+                        <td>Planejamento de Março</td>
+                    </tr>
+                    <tr>
+                        <td>15/03/2026</td>
+                        <td>14:00</td>
+                        <td>Sede do Projeto</td>
+                        <td>Balanço Financeiro</td>
+                    </tr>
+                    <tr>
+                        <td>12/04/2026</td>
+                        <td>14:00</td>
+                        <td>Sede do Projeto</td>
+                        <td>Novos Projetos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Members Area (Protected) -->
+    <section id="members" class="protected-content">
+        <div class="container">
+            <div class="user-info" id="userInfo">
+                <h3>
+                    Bem-vindo(a), <span id="userName"></span>! 👋
+                    <span class="user-permission-badge" id="permissionBadge"></span>
+                </h3>
+                <button class="btn-logout" onclick="logout()">Sair</button>
+            </div>
+
+            <h2 style="text-align: center; color: #2c7a3f; margin-bottom: 2rem;">Área dos Membros</h2>
+
+            <!-- Edit Controls -->
+            <div class="edit-controls">
+                <button class="btn-edit" id="btnEditMode" onclick="toggleEditMode()">✏️ Modo Edição</button>
+                <button class="btn-edit btn-save" id="btnSave" style="display: none;" onclick="saveChanges()">💾 Salvar Alterações</button>
+                <button class="btn-edit btn-cancel" id="btnCancel" style="display: none;" onclick="cancelEdit()">❌ Cancelar</button>
+                <button class="btn-edit" onclick="showSection('history')">📜 Ver Histórico</button>
+            </div>
+
+            <!-- Financial Summary -->
+            <h3 style="color: #2c7a3f; margin-bottom: 1rem;">💰 Resumo Financeiro</h3>
+            <div class="financial-summary">
+                <div class="finance-box income">
+                    <h4>Entradas</h4>
+                    <div class="amount editable" data-field="totalIncome" contenteditable="false">R$ 12.450,00</div>
+                </div>
+                <div class="finance-box expense">
+                    <h4>Gastos</h4>
+                    <div class="amount editable" data-field="totalExpenses" contenteditable="false">R$ 8.230,00</div>
+                </div>
+                <div class="finance-box balance">
+                    <h4>Saldo</h4>
+                    <div class="amount" id="balance">R$ 4.220,00</div>
+                </div>
+            </div>
+
+            <!-- Income Table -->
+            <h3 style="color: #2c7a3f; margin-top: 3rem; margin-bottom: 1rem;">📈 Entradas de Dinheiro</h3>
+            <button class="btn-add" onclick="addIncomeRow()">+ Adicionar Entrada</button>
+            <table id="incomeTable">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Origem</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-id="1">
+                        <td class="editable" data-field="date" contenteditable="false">10/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Doação - Empresa XYZ</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #4caf50; font-weight: bold;">R$ 5.000,00</td>
+                        <td class="editable" data-field="source" contenteditable="false">Patrocínio</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'income')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="2">
+                        <td class="editable" data-field="date" contenteditable="false">05/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Bazar Beneficente</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #4caf50; font-weight: bold;">R$ 2.450,00</td>
+                        <td class="editable" data-field="source" contenteditable="false">Evento</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'income')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="3">
+                        <td class="editable" data-field="date" contenteditable="false">01/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Contribuições Mensais</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #4caf50; font-weight: bold;">R$ 3.000,00</td>
+                        <td class="editable" data-field="source" contenteditable="false">Membros</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'income')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="4">
+                        <td class="editable" data-field="date" contenteditable="false">25/01/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Rifas Solidárias</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #4caf50; font-weight: bold;">R$ 2.000,00</td>
+                        <td class="editable" data-field="source" contenteditable="false">Evento</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'income')" style="display: none;">Excluir</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Expenses Table -->
+            <h3 style="color: #2c7a3f; margin-top: 3rem; margin-bottom: 1rem;">📉 Controle de Gastos</h3>
+            <button class="btn-add" onclick="addExpenseRow()">+ Adicionar Gasto</button>
+            <table id="expenseTable">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-id="1">
+                        <td class="editable" data-field="date" contenteditable="false">08/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Material Escolar - Reforço</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #f44336; font-weight: bold;">R$ 1.500,00</td>
+                        <td class="editable" data-field="category" contenteditable="false">Educação</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="2">
+                        <td class="editable" data-field="date" contenteditable="false">06/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Sementes e Ferramentas - Horta</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #f44336; font-weight: bold;">R$ 850,00</td>
+                        <td class="editable" data-field="category" contenteditable="false">Horta Comunitária</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="3">
+                        <td class="editable" data-field="date" contenteditable="false">03/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Aluguel da Sede</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #f44336; font-weight: bold;">R$ 1.200,00</td>
+                        <td class="editable" data-field="category" contenteditable="false">Infraestrutura</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="4">
+                        <td class="editable" data-field="date" contenteditable="false">02/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Lanches - Reunião</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #f44336; font-weight: bold;">R$ 380,00</td>
+                        <td class="editable" data-field="category" contenteditable="false">Eventos</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="5">
+                        <td class="editable" data-field="date" contenteditable="false">01/02/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Material de Limpeza</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #f44336; font-weight: bold;">R$ 250,00</td>
+                        <td class="editable" data-field="category" contenteditable="false">Manutenção</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="6">
+                        <td class="editable" data-field="date" contenteditable="false">28/01/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Impressão de Materiais</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #f44336; font-weight: bold;">R$ 420,00</td>
+                        <td class="editable" data-field="category" contenteditable="false">Comunicação</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: none;">Excluir</button></td>
+                    </tr>
+                    <tr data-id="7">
+                        <td class="editable" data-field="date" contenteditable="false">20/01/2026</td>
+                        <td class="editable" data-field="description" contenteditable="false">Equipamentos Esportivos</td>
+                        <td class="editable" data-field="amount" contenteditable="false" style="color: #f44336; font-weight: bold;">R$ 3.630,00</td>
+                        <td class="editable" data-field="category" contenteditable="false">Esportes</td>
+                        <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: none;">Excluir</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Project Details -->
+            <h3 style="color: #2c7a3f; margin-top: 3rem; margin-bottom: 1rem;">📊 Detalhes dos Projetos</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3 class="editable" data-field="projectName" contenteditable="false">Horta Comunitária</h3>
+                    <p><strong>Status:</strong> <span class="editable" data-field="status" contenteditable="false">Em andamento</span></p>
+                    <p><strong>Investimento:</strong> <span class="editable" data-field="investment" contenteditable="false">R$ 2.850,00</span></p>
+                    <p><strong>Beneficiários:</strong> <span class="editable" data-field="beneficiaries" contenteditable="false">45 famílias</span></p>
+                    <p><strong>Responsável:</strong> <span class="editable" data-field="responsible" contenteditable="false">Maria Silva</span></p>
+                </div>
+                <div class="card">
+                    <h3 class="editable" data-field="projectName" contenteditable="false">Reforço Escolar</h3>
+                    <p><strong>Status:</strong> <span class="editable" data-field="status" contenteditable="false">Em andamento</span></p>
+                    <p><strong>Investimento:</strong> <span class="editable" data-field="investment" contenteditable="false">R$ 3.200,00</span></p>
+                    <p><strong>Beneficiários:</strong> <span class="editable" data-field="beneficiaries" contenteditable="false">32 crianças</span></p>
+                    <p><strong>Responsável:</strong> <span class="editable" data-field="responsible" contenteditable="false">João Santos</span></p>
+                </div>
+                <div class="card">
+                    <h3 class="editable" data-field="projectName" contenteditable="false">Capacitação Profissional</h3>
+                    <p><strong>Status:</strong> <span class="editable" data-field="status" contenteditable="false">Planejamento</span></p>
+                    <p><strong>Orçamento:</strong> <span class="editable" data-field="budget" contenteditable="false">R$ 8.000,00</span></p>
+                    <p><strong>Previsão:</strong> <span class="editable" data-field="forecast" contenteditable="false">Março 2026</span></p>
+                    <p><strong>Responsável:</strong> <span class="editable" data-field="responsible" contenteditable="false">Ana Costa</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="protected-content">
+        <div class="container">
+            <h2 style="text-align: center; color: #2c7a3f; margin-bottom: 2rem;">📜 Histórico de Alterações</h2>
+            <button class="btn-edit" onclick="showSection('members')">← Voltar para Área dos Membros</button>
+            
+            <div class="history-section">
+                <h3 style="color: #2c7a3f; margin-bottom: 1rem;">Todas as Modificações</h3>
+                <div id="historyList">
+                    <div class="history-item">
+                        <div class="timestamp">12/02/2026 - 10:30 - Usuário: membro</div>
+                        <div class="change-description">Sistema Inicializado</div>
+                        <div class="change-details">Estrutura inicial do sistema de controle financeiro criada.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeLogin()">&times;</span>
+            <h2 style="color: #2c7a3f; text-align: center; margin-bottom: 2rem;">Login - Área dos Membros</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Usuário</label>
+                    <input type="text" id="username" required placeholder="Digite seu usuário">
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="password" required placeholder="Digite sua senha">
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                <em>Usuários de demonstração:</em><br>
+                <strong>Admin:</strong> usuario1/senha1, usuario2/senha2<br>
+                <strong>Editor:</strong> usuario3/senha3, usuario4/senha4, usuario5/senha5<br>
+                <strong>Visualizador:</strong> usuario6/senha6, usuario7/senha7, usuario8/senha8
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Comunidade em Campo - Castelo Branco 2, Rio Grande/RS</p>
+        <p>Transformando vidas através da solidariedade 🌱</p>
+    </footer>
+
+    <script>
+        // ============================================
+        // SISTEMA DE USUÁRIOS - EDITE AQUI
+        // ============================================
+        const usuarios = {
+            // USUÁRIO 1 - Admin
+            'usuario1': {
+                senha: 'senha1',
+                nome: 'Nome Completo Usuario 1',
+                permissao: 'admin' // admin, editor, visualizador
+            },
+            // USUÁRIO 2 - Admin
+            'usuario2': {
+                senha: 'senha2',
+                nome: 'Nome Completo Usuario 2',
+                permissao: 'admin'
+            },
+            // USUÁRIO 3 - Editor
+            'usuario3': {
+                senha: 'senha3',
+                nome: 'Nome Completo Usuario 3',
+                permissao: 'editor'
+            },
+            // USUÁRIO 4 - Editor
+            'usuario4': {
+                senha: 'senha4',
+                nome: 'Nome Completo Usuario 4',
+                permissao: 'editor'
+            },
+            // USUÁRIO 5 - Editor
+            'usuario5': {
+                senha: 'senha5',
+                nome: 'Nome Completo Usuario 5',
+                permissao: 'editor'
+            },
+            // USUÁRIO 6 - Visualizador
+            'usuario6': {
+                senha: 'senha6',
+                nome: 'Nome Completo Usuario 6',
+                permissao: 'visualizador'
+            },
+            // USUÁRIO 7 - Visualizador
+            'usuario7': {
+                senha: 'senha7',
+                nome: 'Nome Completo Usuario 7',
+                permissao: 'visualizador'
+            },
+            // USUÁRIO 8 - Visualizador
+            'usuario8': {
+                senha: 'senha8',
+                nome: 'Nome Completo Usuario 8',
+                permissao: 'visualizador'
+            }
+        };
+        // ============================================
+        // FIM DA SEÇÃO DE EDIÇÃO DE USUÁRIOS
+        // ============================================
+
+        // Variáveis de controle
+        let isLoggedIn = false;
+        let currentUser = null;
+        let userPermission = null;
+        let editMode = false;
+        let changeHistory = [
+            {
+                timestamp: '12/02/2026 - 10:30',
+                user: 'Sistema',
+                description: 'Sistema Inicializado',
+                details: 'Estrutura inicial do sistema de controle financeiro criada.'
+            }
+        ];
+        let originalData = {};
+
+        // Hamburger Menu
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            const hamburger = document.querySelector('.hamburger');
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const nav = document.getElementById('mainNav');
+            const hamburger = document.querySelector('.hamburger');
+            nav.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Mostrar seções
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            if (sectionId === 'members' || sectionId === 'history') {
+                if (!isLoggedIn) {
+                    showLogin();
+                    return;
+                }
+            }
+
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Mostrar login
+        function showLogin() {
+            if (isLoggedIn) {
+                showSection('members');
+            } else {
+                document.getElementById('loginModal').classList.add('active');
+            }
+        }
+
+        // Fechar login
+        function closeLogin() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        // Handle login
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Verificar se usuário existe e senha está correta
+            if (usuarios[username] && usuarios[username].senha === password) {
+                isLoggedIn = true;
+                currentUser = username;
+                userPermission = usuarios[username].permissao;
+                
+                document.getElementById('userName').textContent = usuarios[username].nome;
+                document.getElementById('userInfo').classList.add('active');
+                document.getElementById('members').classList.add('protected-content', 'active');
+                
+                // Mostrar/ocultar botões de edição baseado na permissão
+                updateUIBasedOnPermission();
+                
+                closeLogin();
+                showSection('members');
+                alert(`Login realizado com sucesso!\nBem-vindo(a), ${usuarios[username].nome}!\nPermissão: ${userPermission}`);
+            } else {
+                alert('Usuário ou senha incorretos. Tente novamente.');
+            }
+        }
+
+        // Atualizar interface baseada na permissão do usuário
+        function updateUIBasedOnPermission() {
+            const editControls = document.querySelector('.edit-controls');
+            const btnEditMode = document.getElementById('btnEditMode');
+            const addButtons = document.querySelectorAll('.btn-add');
+            const permissionBadge = document.getElementById('permissionBadge');
+
+            // Atualizar badge de permissão
+            if (permissionBadge) {
+                let badgeClass = '';
+                let badgeText = '';
+                
+                if (userPermission === 'admin') {
+                    badgeClass = 'badge-admin';
+                    badgeText = '👑 ADMIN';
+                } else if (userPermission === 'editor') {
+                    badgeClass = 'badge-editor';
+                    badgeText = '✏️ EDITOR';
+                } else if (userPermission === 'visualizador') {
+                    badgeClass = 'badge-visualizador';
+                    badgeText = '👁️ VISUALIZADOR';
+                }
+                
+                permissionBadge.className = 'user-permission-badge ' + badgeClass;
+                permissionBadge.textContent = badgeText;
+            }
+
+            if (userPermission === 'visualizador') {
+                // Visualizadores não podem editar
+                if (editControls) {
+                    btnEditMode.style.display = 'none';
+                    addButtons.forEach(btn => btn.style.display = 'none');
+                }
+            } else if (userPermission === 'editor') {
+                // Editores podem editar mas têm algumas restrições
+                if (editControls) {
+                    btnEditMode.style.display = 'inline-block';
+                    addButtons.forEach(btn => btn.style.display = 'inline-block');
+                }
+            } else if (userPermission === 'admin') {
+                // Admins têm acesso total
+                if (editControls) {
+                    btnEditMode.style.display = 'inline-block';
+                    addButtons.forEach(btn => btn.style.display = 'inline-block');
+                }
+            }
+        }
+
+        // Logout
+        function logout() {
+            if (editMode) {
+                if (!confirm('Você tem alterações não salvas. Deseja realmente sair?')) {
+                    return;
+                }
+            }
+            isLoggedIn = false;
+            currentUser = null;
+            userPermission = null;
+            editMode = false;
+            document.getElementById('userInfo').classList.remove('active');
+            document.getElementById('members').classList.remove('active');
+            document.getElementById('history').classList.remove('active');
+            showSection('home');
+            alert('Logout realizado com sucesso!');
+        }
+
+        // Toggle Edit Mode
+        function toggleEditMode() {
+            // Verificar permissão
+            if (userPermission === 'visualizador') {
+                alert('Você não tem permissão para editar. Apenas visualizadores.');
+                return;
+            }
+
+            editMode = !editMode;
+            const editables = document.querySelectorAll('.editable');
+            const btnEdit = document.getElementById('btnEditMode');
+            const btnSave = document.getElementById('btnSave');
+            const btnCancel = document.getElementById('btnCancel');
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+
+            if (editMode) {
+                // Salvar dados originais
+                originalData = {};
+                editables.forEach((el, index) => {
+                    originalData[index] = el.textContent;
+                    el.contentEditable = 'true';
+                    el.classList.add('editing');
+                });
+
+                deleteButtons.forEach(btn => btn.style.display = 'inline-block');
+                btnEdit.style.display = 'none';
+                btnSave.style.display = 'inline-block';
+                btnCancel.style.display = 'inline-block';
+            } else {
+                editables.forEach(el => {
+                    el.contentEditable = 'false';
+                    el.classList.remove('editing');
+                });
+                
+                deleteButtons.forEach(btn => btn.style.display = 'none');
+                btnEdit.style.display = 'inline-block';
+                btnSave.style.display = 'none';
+                btnCancel.style.display = 'none';
+            }
+        }
+
+        // Save Changes
+        function saveChanges() {
+            if (!confirm('Deseja salvar todas as alterações?')) {
+                return;
+            }
+
+            const changes = [];
+            const editables = document.querySelectorAll('.editable');
+            
+            editables.forEach((el, index) => {
+                if (originalData[index] !== el.textContent) {
+                    changes.push({
+                        field: el.dataset.field || 'campo',
+                        oldValue: originalData[index],
+                        newValue: el.textContent
+                    });
+                }
+            });
+
+            if (changes.length > 0) {
+                const now = new Date();
+                const timestamp = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} - ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                
+                const userName = currentUser ? usuarios[currentUser].nome : 'Sistema';
+                
+                const historyEntry = {
+                    timestamp: timestamp,
+                    user: userName,
+                    description: `${changes.length} alteração(ões) realizada(s)`,
+                    details: changes.map(c => `${c.field}: "${c.oldValue}" → "${c.newValue}"`).join('; ')
+                };
+
+                changeHistory.unshift(historyEntry);
+                updateHistoryDisplay();
+                
+                // Recalcular saldo se houver mudanças financeiras
+                calculateBalance();
+            }
+
+            toggleEditMode();
+            alert('Alterações salvas com sucesso!');
+        }
+
+        // Cancel Edit
+        function cancelEdit() {
+            if (!confirm('Deseja cancelar as alterações?')) {
+                return;
+            }
+
+            const editables = document.querySelectorAll('.editable');
+            editables.forEach((el, index) => {
+                el.textContent = originalData[index];
+            });
+
+            toggleEditMode();
+        }
+
+        // Add Income Row
+        function addIncomeRow() {
+            if (userPermission === 'visualizador') {
+                alert('Você não tem permissão para adicionar entradas.');
+                return;
+            }
+
+            const table = document.getElementById('incomeTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow(0);
+            const id = Date.now();
+            newRow.dataset.id = id;
+
+            const now = new Date();
+            const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+
+            newRow.innerHTML = `
+                <td class="editable" data-field="date" contenteditable="${editMode}">${dateStr}</td>
+                <td class="editable" data-field="description" contenteditable="${editMode}">Nova Entrada</td>
+                <td class="editable" data-field="amount" contenteditable="${editMode}" style="color: #4caf50; font-weight: bold;">R$ 0,00</td>
+                <td class="editable" data-field="source" contenteditable="${editMode}">Origem</td>
+                <td><button class="btn-delete" onclick="deleteRow(this, 'income')" style="display: ${editMode ? 'inline-block' : 'none'};">Excluir</button></td>
+            `;
+
+            if (editMode) {
+                newRow.querySelectorAll('.editable').forEach(el => {
+                    el.classList.add('editing');
+                });
+            }
+
+            addToHistory('Adicionada nova entrada de dinheiro', `ID: ${id}, Data: ${dateStr}`);
+        }
+
+        // Add Expense Row
+        function addExpenseRow() {
+            if (userPermission === 'visualizador') {
+                alert('Você não tem permissão para adicionar gastos.');
+                return;
+            }
+
+            const table = document.getElementById('expenseTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow(0);
+            const id = Date.now();
+            newRow.dataset.id = id;
+
+            const now = new Date();
+            const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+
+            newRow.innerHTML = `
+                <td class="editable" data-field="date" contenteditable="${editMode}">${dateStr}</td>
+                <td class="editable" data-field="description" contenteditable="${editMode}">Novo Gasto</td>
+                <td class="editable" data-field="amount" contenteditable="${editMode}" style="color: #f44336; font-weight: bold;">R$ 0,00</td>
+                <td class="editable" data-field="category" contenteditable="${editMode}">Categoria</td>
+                <td><button class="btn-delete" onclick="deleteRow(this, 'expense')" style="display: ${editMode ? 'inline-block' : 'none'};">Excluir</button></td>
+            `;
+
+            if (editMode) {
+                newRow.querySelectorAll('.editable').forEach(el => {
+                    el.classList.add('editing');
+                });
+            }
+
+            addToHistory('Adicionado novo gasto', `ID: ${id}, Data: ${dateStr}`);
+        }
+
+        // Delete Row
+        function deleteRow(button, type) {
+            if (userPermission === 'visualizador') {
+                alert('Você não tem permissão para excluir registros.');
+                return;
+            }
+
+            if (!confirm('Deseja realmente excluir este registro?')) {
+                return;
+            }
+
+            const row = button.closest('tr');
+            const id = row.dataset.id;
+            const description = row.querySelector('[data-field="description"]').textContent;
+            
+            row.remove();
+            calculateBalance();
+            
+            addToHistory(`Registro excluído (${type === 'income' ? 'Entrada' : 'Gasto'})`, `ID: ${id}, Descrição: ${description}`);
+        }
+
+        // Calculate Balance
+        function calculateBalance() {
+            const incomeTable = document.getElementById('incomeTable');
+            const expenseTable = document.getElementById('expenseTable');
+            
+            let totalIncome = 0;
+            let totalExpenses = 0;
+
+            // Calcular entradas
+            incomeTable.querySelectorAll('tbody tr').forEach(row => {
+                const amountText = row.querySelector('[data-field="amount"]').textContent;
+                const amount = parseFloat(amountText.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
+                if (!isNaN(amount)) {
+                    totalIncome += amount;
+                }
+            });
+
+            // Calcular gastos
+            expenseTable.querySelectorAll('tbody tr').forEach(row => {
+                const amountText = row.querySelector('[data-field="amount"]').textContent;
+                const amount = parseFloat(amountText.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
+                if (!isNaN(amount)) {
+                    totalExpenses += amount;
+                }
+            });
+
+            const balance = totalIncome - totalExpenses;
+
+            // Atualizar exibição
+            document.querySelector('[data-field="totalIncome"]').textContent = formatCurrency(totalIncome);
+            document.querySelector('[data-field="totalExpenses"]').textContent = formatCurrency(totalExpenses);
+            document.getElementById('balance').textContent = formatCurrency(balance);
+        }
+
+        // Format Currency
+        function formatCurrency(value) {
+            return 'R$ ' + value.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        // Add to History
+        function addToHistory(description, details) {
+            const now = new Date();
+            const timestamp = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} - ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            const userName = currentUser ? usuarios[currentUser].nome : 'Sistema';
+            
+            const historyEntry = {
+                timestamp: timestamp,
+                user: userName,
+                description: description,
+                details: details
+            };
+
+            changeHistory.unshift(historyEntry);
+            updateHistoryDisplay();
+        }
+
+        // Update History Display
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+
+            changeHistory.forEach(entry => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.innerHTML = `
+                    <div class="timestamp">${entry.timestamp} - Usuário: ${entry.user}</div>
+                    <div class="change-description">${entry.description}</div>
+                    <div class="change-details">${entry.details}</div>
+                `;
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                closeLogin();
+            }
+        }
+
+        // Atualizar alerta de reunião
+        function updateMeetingAlert() {
+            const now = new Date();
+            const nextMeeting = new Date('2026-02-15T14:00:00');
+            const diff = nextMeeting - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            if (days >= 0) {
+                const alert = document.getElementById('meetingAlert');
+                if (days === 0) {
+                    alert.textContent = '⚠️ HOJE - REUNIÃO às 14h00 na Sede do Projeto!';
+                    alert.style.background = '#f44336';
+                } else if (days === 1) {
+                    alert.textContent = '📅 AMANHÃ - REUNIÃO às 14h00 na Sede do Projeto!';
+                    alert.style.background = '#ff5722';
+                } else {
+                    alert.textContent = `📅 PRÓXIMA REUNIÃO: Sábado, 15/02/2026 às 14h00 - Sede do Projeto (em ${days} dias)`;
+                }
+            }
+        }
+
+        // Atualizar ao carregar
+        updateMeetingAlert();
+        updateHistoryDisplay();
+    </script>
+</body>
+</html>
